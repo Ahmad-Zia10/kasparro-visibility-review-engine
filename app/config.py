@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     reviewer_name: str
     reviewer_token: str = Field(min_length=16)
     database_path: Path = Path("kasparro.db")
+    pack_dir: Path = Path("pack")
 
     def identities(self) -> dict[str, Identity]:
         """Map each configured token to the identity it grants."""

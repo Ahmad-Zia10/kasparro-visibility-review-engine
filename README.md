@@ -52,8 +52,17 @@ Errors always have the shape `{"error": "<code>", "detail": "<text>"}`.
 
 ## Example requests
 
+Set `ANALYST_TOKEN` and `REVIEWER_TOKEN` in your shell to the values in `.env`. On Windows PowerShell,
+use `curl.exe` instead of `curl`.
+
 ```
 curl http://127.0.0.1:8000/health
+
+# Import the pack from PACK_DIR: 201 the first time, 200 with the same dataset afterwards
+curl -X POST http://127.0.0.1:8000/datasets -H "Authorization: Bearer $ANALYST_TOKEN"
+
+# Counts and every rejected record with its line and reason
+curl http://127.0.0.1:8000/datasets/<dataset_id> -H "Authorization: Bearer $REVIEWER_TOKEN"
 ```
 
 The full flow (import, analyse, edit, submit, approve or reject, export) is added as each endpoint lands.

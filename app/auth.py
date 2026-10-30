@@ -26,5 +26,6 @@ def require_reviewer(identity: Annotated[Identity, Depends(current_identity)]) -
     return identity
 
 
+Caller = Annotated[Identity, Depends(current_identity)]
 Analyst = Annotated[Identity, Depends(require_analyst)]
 Reviewer = Annotated[Identity, Depends(require_reviewer)]
