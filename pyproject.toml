@@ -25,6 +25,8 @@ select = [
   "S608",          # SQL built from strings
   "PLR0911", "PLR0912", "PLR0913", "PLR0915",
 ]
+# Error classes are named for their HTTP meaning: Forbidden, Conflict, NotFound.
+ignore = ["N818"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 8
@@ -41,4 +43,5 @@ max-statements = 30
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 addopts = "-q"
