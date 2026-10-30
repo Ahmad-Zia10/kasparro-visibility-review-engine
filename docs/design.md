@@ -128,11 +128,10 @@ logged in `model_calls`.
 ## Model adapter (R15, R17, R19, R21, R38, R39, R48)
 
 `classify/base.py` defines a `Classifier` Protocol with `classify(response) -> Classification`, and the
-`Classification` Pydantic model. Three implementations, chosen by `MODEL_MODE`. The brief also names a
-local-model mode; it is not built because no local model is available, so no result is ever labelled
-`local-model`.
+`Classification` Pydantic model. Three implementations, chosen by `MODEL_MODE`. No hosted model access was
+provided, so the real adapter calls a local Ollama model; results are labelled `local-model`, never `live`.
 
-- `live`: calls the API with a timeout, bounded `max_tokens`, asks for JSON only, validates with Pydantic. Saves every raw output to the replay file.
+- `local`: calls Ollama's `/api/chat` on `OLLAMA_URL` with a timeout, bounded output tokens, temperature 0 and a JSON schema for the output, then validates with Pydantic. Saves every received output to the replay file. Cost is not applicable and stays empty.
 - `replay`: returns saved outputs keyed by `(response_id, prompt_version)`. Missing key is a failure, not a guess.
 - `stub`: returns canned outputs set by tests, including invalid JSON, empty output and timeouts.
 
