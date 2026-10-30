@@ -35,6 +35,29 @@ python -m app.db init             # create the SQLite schema
 uvicorn app.main:app --reload     # API at http://127.0.0.1:8000, docs at /docs
 ```
 
+## Model modes
+
+Each answer is labelled by a classifier chosen with `MODEL_MODE` in `.env`. Every result records which
+mode produced it.
+
+- `replay` (default): reads saved outputs from `REPLAY_PATH`. Needs no model and no network. An answer
+  with no saved output fails as `missing_replay`; nothing is guessed.
+- `local`: calls a model served by [Ollama](https://ollama.com) at `OLLAMA_URL`, with temperature 0 and a
+  JSON schema for the output. Every output it receives is appended to `REPLAY_PATH`. Results are labelled
+  `local-model`. Nothing is paid; cost is recorded as empty.
+- `stub`: canned outputs, used by the tests.
+
+To use the local model (a one-time download of about 2 GB):
+
+```
+winget install Ollama.Ollama      # or see ollama.com for macOS / Linux
+ollama pull qwen2.5:3b
+```
+
+Then set `MODEL_MODE=local` in `.env`. Switch back to `MODEL_MODE=replay` to rerun offline from the
+saved outputs. Classification on a CPU takes tens of seconds per answer, so `MODEL_TIMEOUT_SECONDS`
+defaults to 180.
+
 ## Test and lint
 
 ```
