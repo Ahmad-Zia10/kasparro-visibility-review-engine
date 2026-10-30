@@ -482,5 +482,5 @@
       "validation": "Repeat the run on a later snapshot and check whether the gap persists."
     }
   ],
-  "active_time_minutes": null
+  "active_time_minutes": 251
 }

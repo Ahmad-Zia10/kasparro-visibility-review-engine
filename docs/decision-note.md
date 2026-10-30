@@ -43,7 +43,7 @@ repeats that one run.
 
 **Omissions.** No live mode. Repeat runs to measure variation were not done (60 to 140 seconds per call
 on this machine). The full 150-answer run was incomplete at submission time; `output/findings.json`
-reports successful, failed and pending counts rather than hiding them. Active time is in
+reports successful, failed and pending counts rather than hiding them. Active time was about 251 minutes; see
 `docs/time-log.md`.
 
 **Questions.** Which engines and prompt types matter most to Kasparro commercially? Is there an
