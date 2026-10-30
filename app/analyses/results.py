@@ -35,11 +35,16 @@ def build_result(call: ModelCall, answer_text: str, citation_urls: list[str]) ->
         evidence.append({"label": item.label, "quote": item.quote, "start": start, "end": end})
     return ResultRow(
         status="done",
-        labels=asdict(labels) | {"competitors": found.competitors},
+        labels=asdict(labels) | {"competitors": clean_competitors(found.competitors)},
         score=asdict(score(labels)),
         evidence=evidence,
         error=None,
     )
+
+
+def clean_competitors(names: list[str]) -> list[str]:
+    """Drop Kasparro itself; the model sometimes lists the brand as its own competitor."""
+    return [name for name in names if not name.lower().startswith("kasparro")]
 
 
 def find_span(answer_text: str, quote: str) -> tuple[int, int] | None:

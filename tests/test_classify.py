@@ -229,3 +229,16 @@ def test_model_mode_picks_classifier(mode: str, expected: type) -> None:
     chosen = make_classifier(settings.model_copy(update={"model_mode": mode}))
 
     assert isinstance(chosen, expected)
+
+
+def test_unverified_quote_is_dropped_when_label_keeps_one() -> None:
+    evidence = [
+        {"label": "mentioned", "quote": "**Kasparro** and BrandX"},
+        {"label": "mentioned", "quote": "invented sentence"},
+    ]
+    output = output_with(evidence=evidence)
+
+    call = StubClassifier({"resp-1": output}).classify(ANSWER)
+
+    assert call.outcome == "ok"
+    assert [item.quote for item in call.classification.evidence] == ["**Kasparro** and BrandX"]

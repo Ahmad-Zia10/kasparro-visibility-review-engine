@@ -13,6 +13,7 @@ Outcome = Literal[
     "ok", "invalid_output", "empty", "timeout", "model_error", "truncated", "missing_replay"
 ]
 Label = Literal["mentioned", "recommended", "negative"]
+MARKDOWN_MARKS = str.maketrans("", "", "*_#`")
 
 
 class Evidence(BaseModel):
@@ -98,11 +99,21 @@ def judge_output(
         classification = Classification.model_validate_json(output)
     except ValidationError as error:
         return "invalid_output", None, first_error(error)
-    answer_words = " ".join(answer.text.split())
-    for item in classification.evidence:
-        if " ".join(item.quote.split()) not in answer_words:
-            return "invalid_output", None, f"{item.label} quote not found in answer"
-    return "ok", classification, None
+    answer_words = plain_words(answer.text)
+    # Unverifiable quotes are dropped; a true label left without one still fails.
+    verified = [item for item in classification.evidence if plain_words(item.quote) in answer_words]
+    try:
+        checked = Classification.model_validate(
+            classification.model_dump() | {"evidence": verified}
+        )
+    except ValidationError as error:
+        return "invalid_output", None, f"no verified quote: {first_error(error)}"
+    return "ok", checked, None
+
+
+def plain_words(text: str) -> str:
+    """Text with markdown emphasis and heading marks removed and whitespace collapsed."""
+    return " ".join(text.translate(MARKDOWN_MARKS).split())
 
 
 def first_error(error: ValidationError) -> str:

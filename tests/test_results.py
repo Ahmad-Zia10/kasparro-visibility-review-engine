@@ -56,3 +56,12 @@ def test_evidence_span_points_at_quote() -> None:
 
 def test_evidence_span_is_null_when_spacing_differs() -> None:
     assert find_span("Options  include Kasparro", "Options include Kasparro") is None
+
+
+def test_kasparro_is_not_listed_as_its_own_competitor() -> None:
+    output = RECOMMENDED.replace('["BrandX"]', '["BrandX", "Kasparro"]')
+    call = StubClassifier({"resp-1": output}).classify(ANSWER)
+
+    result = build_result(call, ANSWER.text, [])
+
+    assert result.labels["competitors"] == ["BrandX"]
