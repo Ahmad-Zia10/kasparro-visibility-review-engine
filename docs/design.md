@@ -143,7 +143,9 @@ The classifier has no tools and no access to anything that could change permissi
 
 Labels per response: `mentioned`, `recommended`, `negative` (booleans), `absent = not mentioned`,
 `competitors` (list of names as written), `position` (int or null), `kasparro_cited` (bool, from citations
-data, deterministic), `evidence` (exact excerpt plus character span for each true label).
+data, deterministic), `evidence` (exact excerpt plus character span for each true label). The span is
+found in code, in the same view the model read; it is `null` when the quote only matches after
+collapsing whitespace.
 
 Citation rule: normalise URLs (lowercase host, strip `www.`, trailing slash, fragment and tracking
 parameters). Within one response a normalised URL counts once, whatever mix of inline and sources-panel
