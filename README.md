@@ -115,3 +115,23 @@ To write the findings for a finished run to `output/findings.json`:
 ```
 python -m app.reports.write_findings <analysis_id>
 ```
+
+## Evaluation
+
+```
+python -m eval.run                # grade the saved outputs against the hand labels (no model needed)
+python -m eval.run --local        # first classify any case with no saved output using Ollama
+```
+
+This writes `eval/results/report.md` and `report.json`: per-label agreement, precision and recall
+against a keyword baseline on the tuning and final splits, a score arithmetic check, a check that every
+diagnostic excerpt is stored evidence (including a planted unsupported claim), and the competitor-list
+fix. The cases and how they were chosen are in `eval/cases/README.md`. Replayed outputs only repeat
+one local-model run; they do not establish model quality.
+
+## Documents
+
+- `docs/design.md`: every design decision and the rules it serves
+- `docs/decision-note.md`: one-page summary, risks and omissions
+- `docs/time-log.md`: active time
+- `output/findings.json`: scores, coverage, diagnostics and remedies for the submitted run
