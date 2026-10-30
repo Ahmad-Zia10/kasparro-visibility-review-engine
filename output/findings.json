@@ -1,0 +1,486 @@
+{
+  "notice": "Archived answers captured on 31 July 2026 (India, English). A historical snapshot, not a current ranking.",
+  "live_observations": "none: only the archived answers were analysed",
+  "label_note": "Labels come from a small local model and are not verified beyond the hand-labelled cases; see the evaluation report.",
+  "analysis": {
+    "dataset_id": "ds_0681851adeca",
+    "execution_mode": "local-model",
+    "prompt_version": "classify_v1",
+    "model": "qwen2.5:3b",
+    "scoring_version": "scoring_v1",
+    "category_version": "categories_v1",
+    "analysis_id": "an_426da39ab0e3",
+    "counts": {
+      "pending": 64,
+      "done": 57,
+      "failed": 29,
+      "skipped": 0,
+      "total": 150
+    }
+  },
+  "summary": "",
+  "aggregates": {
+    "overall": {
+      "n_eligible": 150,
+      "n_successful": 57,
+      "n_failed": 29,
+      "n_skipped": 0,
+      "mentioned": {
+        "count": 45,
+        "rate": 0.789
+      },
+      "recommended": {
+        "count": 12,
+        "rate": 0.211
+      },
+      "negative": {
+        "count": 2,
+        "rate": 0.035
+      },
+      "kasparro_cited": {
+        "count": 10,
+        "rate": 0.175
+      },
+      "mean_score": 37.9
+    },
+    "by_engine": {
+      "aimode": {
+        "n_eligible": 50,
+        "n_successful": 17,
+        "n_failed": 11,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 14,
+          "rate": 0.824
+        },
+        "recommended": {
+          "count": 6,
+          "rate": 0.353
+        },
+        "negative": {
+          "count": 1,
+          "rate": 0.059
+        },
+        "kasparro_cited": {
+          "count": 6,
+          "rate": 0.353
+        },
+        "mean_score": 48.3
+      },
+      "chatgpt": {
+        "n_eligible": 50,
+        "n_successful": 22,
+        "n_failed": 6,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 18,
+          "rate": 0.818
+        },
+        "recommended": {
+          "count": 2,
+          "rate": 0.091
+        },
+        "negative": {
+          "count": 1,
+          "rate": 0.045
+        },
+        "kasparro_cited": {
+          "count": 4,
+          "rate": 0.182
+        },
+        "mean_score": 32.5
+      },
+      "gemini": {
+        "n_eligible": 50,
+        "n_successful": 18,
+        "n_failed": 12,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 13,
+          "rate": 0.722
+        },
+        "recommended": {
+          "count": 4,
+          "rate": 0.222
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "mean_score": 34.5
+      }
+    },
+    "by_category": {
+      "comparison": {
+        "n_eligible": 18,
+        "n_successful": 9,
+        "n_failed": 2,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 8,
+          "rate": 0.889
+        },
+        "recommended": {
+          "count": 4,
+          "rate": 0.444
+        },
+        "negative": {
+          "count": 1,
+          "rate": 0.111
+        },
+        "kasparro_cited": {
+          "count": 3,
+          "rate": 0.333
+        },
+        "mean_score": 53.1
+      },
+      "effectiveness_trust": {
+        "n_eligible": 30,
+        "n_successful": 9,
+        "n_failed": 11,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 8,
+          "rate": 0.889
+        },
+        "recommended": {
+          "count": 2,
+          "rate": 0.222
+        },
+        "negative": {
+          "count": 1,
+          "rate": 0.111
+        },
+        "kasparro_cited": {
+          "count": 3,
+          "rate": 0.333
+        },
+        "mean_score": 41.8
+      },
+      "features_coverage": {
+        "n_eligible": 18,
+        "n_successful": 4,
+        "n_failed": 2,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 3,
+          "rate": 0.75
+        },
+        "recommended": {
+          "count": 1,
+          "rate": 0.25
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 1,
+          "rate": 0.25
+        },
+        "mean_score": 41.6
+      },
+      "method_risk": {
+        "n_eligible": 9,
+        "n_successful": 1,
+        "n_failed": 3,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 1,
+          "rate": 1.0
+        },
+        "recommended": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "mean_score": 31.2
+      },
+      "onboarding_access": {
+        "n_eligible": 24,
+        "n_successful": 12,
+        "n_failed": 4,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 9,
+          "rate": 0.75
+        },
+        "recommended": {
+          "count": 3,
+          "rate": 0.25
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 2,
+          "rate": 0.167
+        },
+        "mean_score": 40.0
+      },
+      "pricing_commercial": {
+        "n_eligible": 21,
+        "n_successful": 8,
+        "n_failed": 3,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 8,
+          "rate": 1.0
+        },
+        "recommended": {
+          "count": 2,
+          "rate": 0.25
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 1,
+          "rate": 0.125
+        },
+        "mean_score": 47.0
+      },
+      "tool_discovery": {
+        "n_eligible": 18,
+        "n_successful": 11,
+        "n_failed": 2,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 6,
+          "rate": 0.545
+        },
+        "recommended": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "mean_score": 17.0
+      },
+      "visibility_strategy": {
+        "n_eligible": 12,
+        "n_successful": 3,
+        "n_failed": 2,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 2,
+          "rate": 0.667
+        },
+        "recommended": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "mean_score": 20.8
+      }
+    },
+    "by_question_type": {
+      "branded": {
+        "n_eligible": 75,
+        "n_successful": 28,
+        "n_failed": 15,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 27,
+          "rate": 0.964
+        },
+        "recommended": {
+          "count": 9,
+          "rate": 0.321
+        },
+        "negative": {
+          "count": 2,
+          "rate": 0.071
+        },
+        "kasparro_cited": {
+          "count": 10,
+          "rate": 0.357
+        },
+        "mean_score": 51.2
+      },
+      "unbranded": {
+        "n_eligible": 75,
+        "n_successful": 29,
+        "n_failed": 14,
+        "n_skipped": 0,
+        "mentioned": {
+          "count": 18,
+          "rate": 0.621
+        },
+        "recommended": {
+          "count": 3,
+          "rate": 0.103
+        },
+        "negative": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "kasparro_cited": {
+          "count": 0,
+          "rate": 0.0
+        },
+        "mean_score": 25.0
+      }
+    },
+    "same_prompt": {
+      "n_prompts": 50,
+      "n_compared": 4,
+      "n_mention_disagreement": 0,
+      "examples": []
+    }
+  },
+  "diagnostics": [
+    {
+      "id": "D1",
+      "title": "Kasparro appears when the question names it, rarely otherwise",
+      "pattern": "Mentioned in 27/28 successful answers to branded questions and 18/29 to unbranded ones.",
+      "possible_explanation": "Engines may not associate Kasparro with the AI-visibility category, so it is only surfaced when the user already knows the name. Not tested here.",
+      "test_evidence": "Unbranded answers that list other tools without Kasparro; compare against the competitor names they give.",
+      "evidence": [
+        {
+          "response_id": "4334ee7a-6315-4312-b0ca-0a58bcd6270c",
+          "engine": "aimode",
+          "excerpt": "competitors named: Semrush (AI Visibility Toolkit), Peec AI, Rank Math AI Visibility, Ahrefs Brand Radar AI"
+        },
+        {
+          "response_id": "847be62a-f50a-4b19-ab6c-43965fbae5ed",
+          "engine": "aimode",
+          "excerpt": "competitors named: [MindStudio](https://mindstudio.ai/), GeneratePrompt.ai, AI-Powered Research Agents, Teleprompt"
+        },
+        {
+          "response_id": "874f97b5-f122-4ac0-b53c-c35ddc82291d",
+          "engine": "gemini",
+          "excerpt": "competitors named: Profound, ZipTie.dev, Peec AI, Otterly.ai"
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "Engines differ in whether a mention becomes a recommendation",
+      "pattern": "Recommendation rate is lowest on chatgpt (2/22) and highest on aimode (6/17).",
+      "possible_explanation": "Engines draw on different sources; one may find less third-party material that supports recommending Kasparro. Not tested here.",
+      "test_evidence": "Answers on chatgpt that mention Kasparro without recommending it.",
+      "evidence": [
+        {
+          "response_id": "08f81acc-0824-4e3a-a5d5-58446e2a6a90",
+          "engine": "chatgpt",
+          "excerpt": "Kasparro"
+        },
+        {
+          "response_id": "0eb89a67-4548-4810-ba1c-1881a919823d",
+          "engine": "chatgpt",
+          "excerpt": "Enterprise software platforms can improve their visibility in ChatGPT answers, but there isn't a switch that guarantees inclusion."
+        },
+        {
+          "response_id": "13c261d3-f05a-444f-81d6-69e769af59cf",
+          "engine": "chatgpt",
+          "excerpt": "If your goal is specifically **measuring whether your brand is included, recommended, and cited in AI search answers** (rather than optimizing traditional SEO), the market is still young, but a few platforms stand out."
+        },
+        {
+          "response_id": "1d2dc007-0757-480d-a086-6b6e2e13c463",
+          "engine": "chatgpt",
+          "excerpt": "If you mean **Kasparro** (the B2B SaaS growth/outbound agency, not Kaspr), I couldn't find reliable public pricing or enough verified information to judge whether it's objectively overpriced."
+        },
+        {
+          "response_id": "2fef505c-f845-43d3-aee0-8926d21bc31e",
+          "engine": "chatgpt",
+          "excerpt": "Kasparro's **Four Module Audit Score** appears to be a proprietary assessment framework that measures how visible and \"recommendable\" a brand is to AI assistants"
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "Some answers frame Kasparro as unproven or hard to verify",
+      "pattern": "2 of 45 answers that mention Kasparro also say something unfavourable.",
+      "possible_explanation": "Answers may lack independent reviews or case studies to cite. A citation only shows a link was returned; the pages were not inspected.",
+      "test_evidence": "Quoted unfavourable passages, one per answer.",
+      "evidence": [
+        {
+          "response_id": "08f81acc-0824-4e3a-a5d5-58446e2a6a90",
+          "engine": "chatgpt",
+          "excerpt": "I'd be skeptical of taking any single \"AI visibility score\" at face value."
+        },
+        {
+          "response_id": "449f8530-b47a-411c-9bec-1b5b6e0552cb",
+          "engine": "aimode",
+          "excerpt": "Profound’s practical entry point is often high ($399/month for full functionality). Alternatives often provide Claude tracking at a lower price point ($59-$99 range)"
+        }
+      ]
+    }
+  ],
+  "remedies": [
+    {
+      "priority": 1,
+      "diagnostic": "D1",
+      "problem": "Mentioned in 27/28 successful answers to branded questions and 18/29 to unbranded ones.",
+      "evidence": [
+        "4334ee7a-6315-4312-b0ca-0a58bcd6270c",
+        "847be62a-f50a-4b19-ab6c-43965fbae5ed",
+        "874f97b5-f122-4ac0-b53c-c35ddc82291d"
+      ],
+      "action": "Investigate which sources the unbranded answers draw on, and whether Kasparro is listed in the comparison pages and directories those sources come from.",
+      "expected_benefit": "Shows whether category association is the gap.",
+      "effort": "low: one analyst day reading cited pages",
+      "uncertainty": "High. Engines change; presence in sources may not lead to inclusion.",
+      "validation": "Rerun the 25 unbranded prompts after a change and compare mentions."
+    },
+    {
+      "priority": 2,
+      "diagnostic": "D3",
+      "problem": "2 of 45 answers that mention Kasparro also say something unfavourable.",
+      "evidence": [
+        "08f81acc-0824-4e3a-a5d5-58446e2a6a90",
+        "449f8530-b47a-411c-9bec-1b5b6e0552cb"
+      ],
+      "action": "Publish verifiable proof that answers can cite: named case studies, method documentation and independent reviews, only where they are true.",
+      "expected_benefit": "Gives engines something to cite instead of a lack of evidence.",
+      "effort": "medium: depends on customer permission for case studies",
+      "uncertainty": "Medium. Engines may not pick up new pages, or may weigh them lightly.",
+      "validation": "Track the negative count on the branded prompts across repeated runs."
+    },
+    {
+      "priority": 3,
+      "diagnostic": "D2",
+      "problem": "Recommendation rate is lowest on chatgpt (2/22) and highest on aimode (6/17).",
+      "evidence": [
+        "08f81acc-0824-4e3a-a5d5-58446e2a6a90",
+        "0eb89a67-4548-4810-ba1c-1881a919823d",
+        "13c261d3-f05a-444f-81d6-69e769af59cf",
+        "1d2dc007-0757-480d-a086-6b6e2e13c463",
+        "2fef505c-f845-43d3-aee0-8926d21bc31e"
+      ],
+      "action": "Compare the citations of the lowest-recommending engine with the others to see which source types it relies on; decide only after that comparison.",
+      "expected_benefit": "Targets effort at the engine where the gap is largest.",
+      "effort": "low: uses citations already captured",
+      "uncertainty": "High. Based on one snapshot and a small local model's labels.",
+      "validation": "Repeat the run on a later snapshot and check whether the gap persists."
+    }
+  ],
+  "active_time_minutes": null
+}
