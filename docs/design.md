@@ -67,7 +67,7 @@ analyses          analysis_id PK, dataset_id FK, execution_mode CHECK, prompt_ve
                   category_version, status CHECK, created_at,
                   UNIQUE(dataset_id, execution_mode, prompt_version, model, scoring_version, category_version)
 response_results  analysis_id FK, response_id FK, status CHECK('pending','done','failed','skipped'),
-                  attempts CHECK(attempts <= 3), labels_json, score_json, evidence_json, error, reason,
+                  attempts INTEGER NOT NULL DEFAULT 0 CHECK(attempts >= 0), labels_json, score_json, evidence_json, error, reason,
                   updated_at, PRIMARY KEY(analysis_id, response_id)
 model_calls       call_id PK, analysis_id, response_id, execution_mode, model, latency_ms, input_tokens,
                   output_tokens, cost_usd NULL, outcome, created_at
@@ -93,13 +93,16 @@ analyses. Tests call `process_pending(conn, classifier, limit)` directly, with n
 
 Exactly-once limit: the database guarantees one stored result per `(analysis_id, response_id)`. It cannot
 guarantee one model call. If the process dies after the provider responds but before the result is saved,
-the retry calls the model again and may be billed again. Attempts are capped at 3 and every call is
+the retry calls the model again and may be billed again. Attempts are capped at `MODEL_MAX_ATTEMPTS`
+(default 3) by the guarded update `... AND attempts < ?`, and every call is
 logged in `model_calls`.
 
 ## Model adapter (R15, R17, R19, R21, R38, R39, R48)
 
 `classify/base.py` defines a `Classifier` Protocol with `classify(response) -> Classification`, and the
-`Classification` Pydantic model. Three implementations, chosen by `MODEL_MODE`:
+`Classification` Pydantic model. Three implementations, chosen by `MODEL_MODE`. The brief also names a
+local-model mode; it is not built because no local model is available, so no result is ever labelled
+`local-model`.
 
 - `live`: calls the API with a timeout, bounded `max_tokens`, asks for JSON only, validates with Pydantic. Saves every raw output to the replay file.
 - `replay`: returns saved outputs keyed by `(response_id, prompt_version)`. Missing key is a failure, not a guess.
