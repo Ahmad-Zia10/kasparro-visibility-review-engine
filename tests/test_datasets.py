@@ -1,23 +1,11 @@
 import json
-import shutil
 from contextlib import closing
 from pathlib import Path
 
-import pytest
 from fastapi.testclient import TestClient
 
 from app.config import settings
 from app.db import connect
-
-FIXTURE_PACK = Path(__file__).parent / "fixtures" / "small_pack"
-
-
-@pytest.fixture
-def pack_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
-    target = tmp_path / "pack"
-    shutil.copytree(FIXTURE_PACK, target)
-    monkeypatch.setattr(settings, "pack_dir", target)
-    return target
 
 
 def append_line(path: Path, line: str) -> None:

@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     model_timeout_seconds: float = Field(default=180, gt=0)
     model_max_output_tokens: int = Field(default=800, gt=0)
     model_max_attempts: int = Field(default=3, ge=1)
+    run_worker: bool = True
     replay_path: Path = Path("eval/results/replay_cache/classify_v1.jsonl")
 
     def identities(self) -> dict[str, Identity]:

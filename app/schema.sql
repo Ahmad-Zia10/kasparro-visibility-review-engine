@@ -39,3 +39,44 @@ CREATE TABLE IF NOT EXISTS citations (
     PRIMARY KEY (dataset_id, citation_id),
     FOREIGN KEY (dataset_id, response_id) REFERENCES responses (dataset_id, response_id)
 );
+
+CREATE TABLE IF NOT EXISTS analyses (
+    analysis_id      TEXT PRIMARY KEY,
+    dataset_id       TEXT NOT NULL REFERENCES datasets (dataset_id),
+    execution_mode   TEXT NOT NULL CHECK (execution_mode IN ('local-model', 'replay', 'stub')),
+    prompt_version   TEXT NOT NULL,
+    model            TEXT NOT NULL,
+    scoring_version  TEXT NOT NULL,
+    category_version TEXT NOT NULL,
+    created_at       TEXT NOT NULL,
+    UNIQUE (dataset_id, execution_mode, prompt_version, model, scoring_version, category_version)
+);
+
+-- No foreign key to responses: skipped rows name rejected records that were never stored.
+CREATE TABLE IF NOT EXISTS response_results (
+    analysis_id   TEXT NOT NULL REFERENCES analyses (analysis_id),
+    response_id   TEXT NOT NULL,
+    status        TEXT NOT NULL CHECK (status IN ('pending', 'done', 'failed', 'skipped')),
+    attempts      INTEGER NOT NULL DEFAULT 0 CHECK (attempts >= 0),
+    labels_json   TEXT,
+    score_json    TEXT,
+    evidence_json TEXT,
+    error         TEXT,
+    reason        TEXT,
+    updated_at    TEXT NOT NULL,
+    PRIMARY KEY (analysis_id, response_id)
+);
+
+CREATE TABLE IF NOT EXISTS model_calls (
+    call_id        TEXT PRIMARY KEY,
+    analysis_id    TEXT NOT NULL REFERENCES analyses (analysis_id),
+    response_id    TEXT NOT NULL,
+    execution_mode TEXT NOT NULL CHECK (execution_mode IN ('local-model', 'replay', 'stub')),
+    model          TEXT,
+    latency_ms     INTEGER NOT NULL,
+    input_tokens   INTEGER,
+    output_tokens  INTEGER,
+    cost_usd       REAL,
+    outcome        TEXT NOT NULL,
+    created_at     TEXT NOT NULL
+);
