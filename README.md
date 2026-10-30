@@ -86,6 +86,32 @@ curl -X POST http://127.0.0.1:8000/datasets -H "Authorization: Bearer $ANALYST_T
 
 # Counts and every rejected record with its line and reason
 curl http://127.0.0.1:8000/datasets/<dataset_id> -H "Authorization: Bearer $REVIEWER_TOKEN"
+
+# Start labelling: 202 for a new run, 200 if the same configuration already ran
+curl -X POST http://127.0.0.1:8000/analyses -H "Authorization: Bearer $ANALYST_TOKEN"   -H "Content-Type: application/json" -d '{"dataset_id": "<dataset_id>"}'
+curl http://127.0.0.1:8000/analyses/<analysis_id> -H "Authorization: Bearer $ANALYST_TOKEN"
+curl "http://127.0.0.1:8000/analyses/<analysis_id>/results?limit=20" -H "Authorization: Bearer $ANALYST_TOKEN"
+
+# Open a report on a finished run; the draft is filled from the findings
+curl -X POST http://127.0.0.1:8000/reports -H "Authorization: Bearer $ANALYST_TOKEN"   -H "Content-Type: application/json" -d '{"analysis_id": "<analysis_id>"}'
+
+# Edit needs the ETag from the last read (428 without it, 412 if stale)
+curl -X PATCH http://127.0.0.1:8000/reports/<report_id> -H "Authorization: Bearer $ANALYST_TOKEN"   -H 'If-Match: "1.1"' -H "Content-Type: application/json" -d '{"content": {"summary": "..."}}'
+
+# Submit, then the reviewer decides on that exact version, with a comment
+curl -X POST http://127.0.0.1:8000/reports/<report_id>/submit -H "Authorization: Bearer $ANALYST_TOKEN"
+curl -X POST http://127.0.0.1:8000/reports/<report_id>/decision -H "Authorization: Bearer $REVIEWER_TOKEN"   -H "Content-Type: application/json" -d '{"version": 1, "decision": "approve", "comment": "checked"}'
+
+# Export only works for an approved, unexpired version; ?version=n exports an older approved one
+curl http://127.0.0.1:8000/reports/<report_id>/export -H "Authorization: Bearer $REVIEWER_TOKEN"
 ```
 
-The full flow (import, analyse, edit, submit, approve or reject, export) is added as each endpoint lands.
+Reviews must be decided within 48 hours of submission (`REVIEW_TTL_HOURS`), and an approval can be
+exported for 168 hours (`APPROVAL_TTL_HOURS`). Editing a submitted or approved version creates a new
+draft that needs its own review.
+
+To write the findings for a finished run to `output/findings.json`:
+
+```
+python -m app.reports.write_findings <analysis_id>
+```

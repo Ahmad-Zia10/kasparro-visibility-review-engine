@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     model_max_attempts: int = Field(default=3, ge=1)
     run_worker: bool = True
     replay_path: Path = Path("eval/results/replay_cache/classify_v1.jsonl")
+    review_ttl_hours: int = Field(default=48, gt=0)
+    approval_ttl_hours: int = Field(default=168, gt=0)
 
     def identities(self) -> dict[str, Identity]:
         """Map each configured token to the identity it grants."""

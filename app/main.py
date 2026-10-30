@@ -18,6 +18,7 @@ from app.errors import (
     handle_http_error,
     handle_validation_error,
 )
+from app.reports.router import router as reports_router
 
 router = APIRouter()
 
@@ -49,6 +50,7 @@ def create_app() -> FastAPI:
     app.include_router(router)
     app.include_router(datasets_router)
     app.include_router(analyses_router)
+    app.include_router(reports_router)
     return app
 
 

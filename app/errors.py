@@ -30,6 +30,21 @@ class NotFound(AppError):
     code = "not_found"
 
 
+class Conflict(AppError):
+    status_code = 409
+    code = "conflict"
+
+
+class StaleVersion(AppError):
+    status_code = 412
+    code = "stale_version"
+
+
+class VersionRequired(AppError):
+    status_code = 428
+    code = "if_match_required"
+
+
 class UnreadablePack(AppError):
     status_code = 422
     code = "unreadable_pack"

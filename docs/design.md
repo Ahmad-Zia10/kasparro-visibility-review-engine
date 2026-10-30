@@ -192,13 +192,31 @@ edited while pending. Only `draft` content can change. Submit sets `review_due_a
 `approval_valid_until = now + 168h`. Expiry is evaluated when someone decides or exports; a decision after
 the deadline marks the version `expired` and returns 409.
 
-Each version has an integer `revision`, starting at 1. The ETag is `"<revision>"`. `PATCH` without
+Each version has an integer `revision`, starting at 1. The ETag is `"<version>.<revision>"`, so a
+new draft (whose revision restarts at 1) never matches a tag read from an older version. `PATCH` without
 `If-Match` returns 428. The content update is
 `... SET content_json = ?, revision = revision + 1 WHERE version_id = ? AND revision = ? AND status = 'draft'`;
 zero rows means the client's copy is stale, so 412.
 
 Export returns content plus `report_id`, `version`, `approved_by`, `approved_at`, `valid_until`,
 `execution_mode`, `scoring_version`, `category_version` and `content_sha256`.
+
+## Findings (R12, R13, R14, R72 to R76, R82)
+
+`app/findings.py` is plain code over stored results; no model is involved. It groups results overall,
+by engine, by category and by branded versus unbranded question, and compares the three engines on
+prompts where all three succeeded. Every group reports `n_eligible`, `n_successful`, `n_failed` and
+`n_skipped`; rates are over successful results only.
+
+The three diagnostics are templates filled from those numbers, each with pattern, possible explanation
+(stated as untested), what would test it, and response IDs with short excerpts from the stored evidence.
+The three remedies are fixed templates tied to the diagnostics, in priority order, with problem,
+evidence, action, expected benefit, effort, uncertainty and a validation step. None promises a ranking
+change; the first is an investigation.
+
+Categories live in `app/categories_v1.json` (`category_version` `categories_v1`). A report draft is built
+from the findings when the report is opened; `python -m app.reports.write_findings <analysis_id>` writes
+the same content to `output/findings.json`. No live observations are made, and the output says so.
 
 ## Out of scope
 
