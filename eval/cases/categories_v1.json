@@ -1,0 +1,266 @@
+{
+  "category_version": "categories_v1",
+  "method": "Assigned by reading each question. branded is true when the question itself names Kasparro. Old labels inside prompt IDs were not used.",
+  "categories": {
+    "effectiveness_trust": "Does it work, is it legitimate, what do users say",
+    "comparison": "Kasparro or the category against a named competitor",
+    "features_coverage": "What it measures and which engines it covers",
+    "method_risk": "Whether the method is a hack or breaks terms of service",
+    "pricing_commercial": "Cost, retainers, cancellation, value for money",
+    "onboarding_access": "Setup time, availability, self-serve, regions",
+    "tool_discovery": "Which tools to use for AI visibility tracking",
+    "visibility_strategy": "How to improve visibility in AI answers"
+  },
+  "prompts": [
+    {
+      "prompt_id": "kasparro:ai_shortlisting:001",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:002",
+      "category": "features_coverage",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:003",
+      "category": "comparison",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:004",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:005",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:006",
+      "category": "features_coverage",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:007",
+      "category": "features_coverage",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:008",
+      "category": "comparison",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:009",
+      "category": "method_risk",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:010",
+      "category": "features_coverage",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:011",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:012",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:013",
+      "category": "comparison",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:014",
+      "category": "effectiveness_trust",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:015",
+      "category": "method_risk",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:016",
+      "category": "pricing_commercial",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:017",
+      "category": "comparison",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:018",
+      "category": "pricing_commercial",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:019",
+      "category": "pricing_commercial",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:020",
+      "category": "onboarding_access",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:021",
+      "category": "comparison",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:022",
+      "category": "pricing_commercial",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:023",
+      "category": "onboarding_access",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:024",
+      "category": "onboarding_access",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:025",
+      "category": "onboarding_access",
+      "branded": true
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:026",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:027",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:028",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:029",
+      "category": "effectiveness_trust",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:030",
+      "category": "effectiveness_trust",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:031",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:032",
+      "category": "visibility_strategy",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:033",
+      "category": "visibility_strategy",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:034",
+      "category": "visibility_strategy",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:035",
+      "category": "visibility_strategy",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:036",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:037",
+      "category": "tool_discovery",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:038",
+      "category": "comparison",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:039",
+      "category": "effectiveness_trust",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:040",
+      "category": "effectiveness_trust",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:041",
+      "category": "features_coverage",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:042",
+      "category": "features_coverage",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:043",
+      "category": "onboarding_access",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:044",
+      "category": "method_risk",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:045",
+      "category": "pricing_commercial",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:046",
+      "category": "pricing_commercial",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:047",
+      "category": "pricing_commercial",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:048",
+      "category": "onboarding_access",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:049",
+      "category": "onboarding_access",
+      "branded": false
+    },
+    {
+      "prompt_id": "kasparro:ai_shortlisting:050",
+      "category": "onboarding_access",
+      "branded": false
+    }
+  ]
+}
