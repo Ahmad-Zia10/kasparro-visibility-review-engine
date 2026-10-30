@@ -1,0 +1,18 @@
+# assignment pack, brief and reference clones
+# output/ and the replay cache are committed: the brief asks for results and a keyless replay run.
+refs/
+pack/
+docs/assignment/
+
+# secrets and local state
+.env
+*.db
+*.db-wal
+*.db-shm
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/

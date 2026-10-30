@@ -1,0 +1,44 @@
+[project]
+name = "kasparro-review"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["pack", "refs"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W", "F",   # pycodestyle, pyflakes
+  "I",             # import order
+  "B",             # bugbear
+  "UP",            # modern syntax
+  "SIM",           # simplifications
+  "RET",           # return style, no else after return
+  "C90",           # complexity
+  "N",             # naming
+  "BLE",           # blind except
+  "ERA",           # commented-out code
+  "T20",           # print statements
+  "PTH",           # pathlib
+  "S608",          # SQL built from strings
+  "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+max-args = 5
+max-returns = 4
+max-branches = 8
+max-statements = 30
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR0913", "S608"]
+"eval/**" = ["T20"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
