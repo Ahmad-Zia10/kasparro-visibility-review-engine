@@ -64,9 +64,9 @@ responses         (dataset_id, response_id) PK, prompt_id FK, engine CHECK, mode
                   answer_text, answer_markdown NULL, raw_json
 citations         (dataset_id, citation_id) PK, response_id FK, position, citation_type CHECK, url, raw_json
 analyses          analysis_id PK, dataset_id FK, execution_mode CHECK, prompt_version, model, scoring_version,
-                  category_version, status CHECK, created_at,
+                  category_version, created_at,
                   UNIQUE(dataset_id, execution_mode, prompt_version, model, scoring_version, category_version)
-response_results  analysis_id FK, response_id FK, status CHECK('pending','done','failed','skipped'),
+response_results  analysis_id FK, response_id, status CHECK('pending','done','failed','skipped'),
                   attempts INTEGER NOT NULL DEFAULT 0 CHECK(attempts >= 0), labels_json, score_json, evidence_json, error, reason,
                   updated_at, PRIMARY KEY(analysis_id, response_id)
 model_calls       call_id PK, analysis_id, response_id, execution_mode, model, latency_ms, input_tokens,
@@ -117,7 +117,23 @@ The worker loop: read the next `pending` row, call the classifier outside any tr
 result or failure with a guarded update (`... AND status = 'pending'`). With a single worker there is no
 claim step and no `running` state. Because each result is saved
 as it finishes, restart resumes naturally: on startup the worker picks up `pending` rows of unfinished
-analyses. Tests call `process_pending(conn, classifier, limit)` directly, with no thread.
+analyses. Tests call `process_pending(conn, classifier, limit)` directly, with no thread
+(`RUN_WORKER=false`).
+
+Details:
+
+- An analysis has no stored status. It is `running` while any row is `pending`, else `complete`, so it
+  cannot drift from the rows.
+- `response_results.response_id` has no foreign key to `responses`: a `skipped` row names a rejected
+  record that was never stored. Rejected lines with no readable ID cannot be keyed; they stay visible on
+  the dataset's `rejected` list.
+- The stub's config key uses the model name `stub`, because SQLite treats NULLs as distinct in `UNIQUE`.
+- The worker only takes rows whose analysis has its own execution mode and model, so a replay worker
+  never fills a stub run.
+- `POST /analyses/{id}/retry` sets `failed` rows back to `pending` while `attempts < MODEL_MAX_ATTEMPTS`.
+  `done` and `skipped` rows are never touched.
+- An unexpected exception on one response is caught at the worker loop and saved as a `failed` result
+  with the reason, so one bad record never stops the rest.
 
 Exactly-once limit: the database guarantees one stored result per `(analysis_id, response_id)`. It cannot
 guarantee one model call. If the process dies after the provider responds but before the result is saved,
