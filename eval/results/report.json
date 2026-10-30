@@ -1,0 +1,259 @@
+{
+  "prompt_version": "classify_v1",
+  "model": "qwen2.5:3b",
+  "splits": {
+    "tune": {
+      "model": {
+        "n_cases": 6,
+        "n_graded": 5,
+        "n_failed": 1,
+        "mentioned": {
+          "agreement": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "counts": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 0.4,
+          "precision": 0.5,
+          "recall": 0.333,
+          "counts": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 2
+          }
+        },
+        "negative": {
+          "agreement": 0.8,
+          "precision": 1.0,
+          "recall": 0.5,
+          "counts": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "position": {
+          "agreement": 0.6
+        }
+      },
+      "baseline": {
+        "n_cases": 6,
+        "n_graded": 6,
+        "n_failed": 0,
+        "mentioned": {
+          "agreement": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "counts": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 0.667,
+          "precision": 0.667,
+          "recall": 0.667,
+          "counts": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 1
+          }
+        },
+        "negative": {
+          "agreement": 0.667,
+          "precision": 0.667,
+          "recall": 0.667,
+          "counts": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 1
+          }
+        },
+        "position": {
+          "agreement": 0.833
+        }
+      }
+    },
+    "final": {
+      "model": {
+        "n_cases": 9,
+        "n_graded": 4,
+        "n_failed": 5,
+        "mentioned": {
+          "agreement": 0.75,
+          "precision": 0.75,
+          "recall": 1.0,
+          "counts": {
+            "tp": 3,
+            "fp": 1,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 0.5,
+          "precision": 1.0,
+          "recall": 0.333,
+          "counts": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 2
+          }
+        },
+        "negative": {
+          "agreement": 0.5,
+          "precision": null,
+          "recall": 0.0,
+          "counts": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          }
+        },
+        "position": {
+          "agreement": 0.75
+        }
+      },
+      "baseline": {
+        "n_cases": 9,
+        "n_graded": 9,
+        "n_failed": 0,
+        "mentioned": {
+          "agreement": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "counts": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "negative": {
+          "agreement": 0.778,
+          "precision": 0.5,
+          "recall": 0.5,
+          "counts": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 1
+          }
+        },
+        "position": {
+          "agreement": 1.0
+        }
+      }
+    },
+    "all": {
+      "model": {
+        "n_cases": 15,
+        "n_graded": 9,
+        "n_failed": 6,
+        "mentioned": {
+          "agreement": 0.889,
+          "precision": 0.875,
+          "recall": 1.0,
+          "counts": {
+            "tp": 7,
+            "fp": 1,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 0.444,
+          "precision": 0.667,
+          "recall": 0.333,
+          "counts": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 4
+          }
+        },
+        "negative": {
+          "agreement": 0.667,
+          "precision": 1.0,
+          "recall": 0.25,
+          "counts": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 3
+          }
+        },
+        "position": {
+          "agreement": 0.667
+        }
+      },
+      "baseline": {
+        "n_cases": 15,
+        "n_graded": 15,
+        "n_failed": 0,
+        "mentioned": {
+          "agreement": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "counts": {
+            "tp": 11,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "recommended": {
+          "agreement": 0.867,
+          "precision": 0.857,
+          "recall": 0.857,
+          "counts": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 1
+          }
+        },
+        "negative": {
+          "agreement": 0.733,
+          "precision": 0.6,
+          "recall": 0.6,
+          "counts": {
+            "tp": 3,
+            "fp": 2,
+            "fn": 2
+          }
+        },
+        "position": {
+          "agreement": 0.933
+        }
+      }
+    }
+  },
+  "failures": {
+    "a3fdd8bb-bcd9-4608-9786-ad4b3a2c7dc2": "Value error, no evidence for mentioned",
+    "d5043498-a516-463e-b97b-5fc917f5e26a": "Value error, no evidence for mentioned",
+    "58034df8-0d67-4878-827a-376afa1efc2b": "no verified quote: Value error, no evidence for mentioned",
+    "e2bb9e59-578d-474c-b7e1-ee8c29b36d90": "Value error, no evidence for mentioned",
+    "5beb2a32-6c6c-42d8-861c-9fc9680b9930": "Value error, no evidence for mentioned",
+    "edge-injection-1": "Value error, no evidence for mentioned"
+  },
+  "score_mismatches": [],
+  "claim_problems": {
+    "real_diagnostics": [],
+    "planted_unsupported_claim": [
+      "X1: excerpt not in evidence of a3fdd8bb-bcd9-4608-9786-ad4b3a2c7dc2"
+    ]
+  },
+  "competitor_fix": {
+    "lists_naming_kasparro_before_fix": 2,
+    "lists_naming_kasparro_after_fix": 0
+  }
+}

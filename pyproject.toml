@@ -42,6 +42,6 @@ max-statements = 30
 "eval/**" = ["T20"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "eval/tests"]
 pythonpath = ["."]
 addopts = "-q"
