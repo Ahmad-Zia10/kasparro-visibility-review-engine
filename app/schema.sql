@@ -80,3 +80,35 @@ CREATE TABLE IF NOT EXISTS model_calls (
     outcome        TEXT NOT NULL,
     created_at     TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS reports (
+    report_id   TEXT PRIMARY KEY,
+    analysis_id TEXT NOT NULL UNIQUE REFERENCES analyses (analysis_id),
+    created_at  TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS report_versions (
+    version_id           TEXT PRIMARY KEY,
+    report_id            TEXT NOT NULL REFERENCES reports (report_id),
+    version_no           INTEGER NOT NULL CHECK (version_no >= 1),
+    status               TEXT NOT NULL CHECK (status IN (
+                             'draft', 'submitted', 'approved', 'rejected', 'expired', 'superseded')),
+    revision             INTEGER NOT NULL DEFAULT 1 CHECK (revision >= 1),
+    content_json         TEXT NOT NULL,
+    content_sha256       TEXT NOT NULL,
+    created_by           TEXT NOT NULL,
+    created_at           TEXT NOT NULL,
+    submitted_at         TEXT,
+    review_due_at        TEXT,
+    approval_valid_until TEXT,
+    UNIQUE (report_id, version_no)
+);
+
+CREATE TABLE IF NOT EXISTS review_decisions (
+    decision_id TEXT PRIMARY KEY,
+    version_id  TEXT NOT NULL UNIQUE REFERENCES report_versions (version_id),
+    actor       TEXT NOT NULL,
+    decision    TEXT NOT NULL CHECK (decision IN ('approve', 'reject')),
+    comment     TEXT NOT NULL CHECK (length(comment) > 0),
+    decided_at  TEXT NOT NULL
+);

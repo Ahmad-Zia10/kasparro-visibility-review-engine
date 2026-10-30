@@ -7,7 +7,7 @@ tuning, and committed before the prompt was changed.
 
 - `labels_v1.jsonl`: 12 responses from the pack: 3 Google AI Mode, 4 ChatGPT, 5 Gemini.
 - `edge_cases.jsonl`: 3 edge cases chosen on purpose, marked `"edge_case": true`.
-- `categories_v1.json`: one category per prompt, plus `branded` (the question names Kasparro).
+- Prompt categories live in `app/categories_v1.json` (one category per prompt, plus `branded`), because the app uses them.
 
 Each case has `split`: `tune` cases may be looked at while changing the prompt; `final` cases are only
 used for the final check.
