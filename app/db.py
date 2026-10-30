@@ -3,6 +3,9 @@ import sys
 from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from pathlib import Path
+from typing import Annotated
+
+from fastapi import Depends
 
 from app.config import settings
 
@@ -32,6 +35,15 @@ def transaction(conn: sqlite3.Connection) -> Iterator[None]:
 
 def init_db(conn: sqlite3.Connection) -> None:
     conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
+
+
+def get_conn() -> Iterator[sqlite3.Connection]:
+    """Give each request its own connection and close it afterwards."""
+    with closing(connect(settings.database_path)) as conn:
+        yield conn
+
+
+Conn = Annotated[sqlite3.Connection, Depends(get_conn)]
 
 
 if __name__ == "__main__":

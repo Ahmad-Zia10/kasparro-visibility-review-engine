@@ -53,16 +53,16 @@ a decision is `identity.name`.
 - Every write goes through `with transaction(conn):` which issues `BEGIN IMMEDIATE`, commits on success, rolls back on exception.
 - Validate input before opening a transaction. Never call the model inside one.
 - State changes use guarded updates: `UPDATE ... SET status='approved' WHERE version_id=? AND status='submitted'`. If `rowcount == 0`, someone else already acted: raise `Conflict`.
-- Constraints are the last line of defence: primary keys on original IDs, `UNIQUE(content_hash)`, `PRIMARY KEY(analysis_id, response_id)`, `UNIQUE(report_id, version_no)`, `UNIQUE(version_id)` on decisions, `CHECK` on every status column.
+- Constraints are the last line of defence: primary keys on `(dataset_id, original ID)`, `UNIQUE(content_hash)`, `PRIMARY KEY(analysis_id, response_id)`, `UNIQUE(report_id, version_no)`, `UNIQUE(version_id)` on decisions, `CHECK` on every status column.
 
 ## Tables
 
 ```
-datasets          dataset_id PK, content_hash UNIQUE, imported_at, accepted_count, rejected_json
-prompts           prompt_id PK, dataset_id FK, text, raw_json
-responses         response_id PK, dataset_id FK, prompt_id FK, engine CHECK, model NULL, answer_text,
-                  answer_markdown, raw_json
-citations         citation_id PK, response_id FK, url, normalised_url, position, location, raw_json
+datasets          dataset_id PK, content_hash UNIQUE, imported_at, rejected_json
+prompts           (dataset_id, prompt_id) PK, text, raw_json
+responses         (dataset_id, response_id) PK, prompt_id FK, engine CHECK, model_version NULL,
+                  answer_text, answer_markdown NULL, raw_json
+citations         (dataset_id, citation_id) PK, response_id FK, position, citation_type CHECK, url, raw_json
 analyses          analysis_id PK, dataset_id FK, execution_mode CHECK, prompt_version, model, scoring_version,
                   category_version, status CHECK, created_at,
                   UNIQUE(dataset_id, execution_mode, prompt_version, model, scoring_version, category_version)
@@ -78,6 +78,34 @@ report_versions   version_id PK, report_id FK, version_no, status CHECK('draft',
 review_decisions  decision_id PK, version_id FK UNIQUE, actor, decision CHECK('approve','reject'),
                   comment NOT NULL CHECK(length(comment) > 0), decided_at
 ```
+
+## Pack import (R6, R7, R8, R37, R40, R41)
+
+`POST /datasets` reads `PACK_DIR/data/{prompts,responses,citations}.jsonl`. A missing or non-UTF-8 file
+stops the import with 422 and stores nothing. Otherwise each line is validated on its own:
+
+- Rules follow `pack/schemas/input_contract.json`: required IDs, `engine` in aimode/chatgpt/gemini,
+  non-empty `answer_text`, `capture_status = captured`, citation `order >= 1`, `citation_type` in
+  inline_hyperlink/sources_panel.
+- A repeated ID in the same file, a response whose prompt was not accepted, or a citation whose response
+  was not accepted is rejected too.
+- Rejected lines are listed on the dataset as `{file, line, record_id, reason}`; valid lines are stored.
+
+Field mapping: IDs, `engine`, `model_version`, `answer_text`, `answer_markdown`, citation `order` (as
+`position`), `citation_type` and `url` get their own columns. Every other field (timestamps, settings,
+capture route, citation title, domain) stays only in `raw_json`, the exact original line. Nulls stay null.
+`answer_text` and `answer_markdown` are two views of one response, so they share one row. Prompt IDs embed
+an old category label (`kasparro:ai_shortlisting:001`); the ID is kept but the label is never used as a
+category.
+
+Identity and re-import: `dataset_id` is `ds_` plus the first 12 hex characters of a SHA-256 over the three
+files. The same files always give the same ID. The existence check and the inserts run in one
+`BEGIN IMMEDIATE` transaction, so two identical imports at once still create one dataset. The first import
+returns 201, a repeat returns 200. Rows use plain `INSERT`, not `INSERT OR IGNORE`: duplicates inside a file
+are already rejected, so a constraint error would mean a bug and should not be hidden.
+
+Keys are `(dataset_id, original ID)` rather than the original ID alone, so a corrected pack with the same
+IDs becomes its own dataset instead of being silently skipped.
 
 ## Background processing (R36, R41, R42, R43, R46)
 
